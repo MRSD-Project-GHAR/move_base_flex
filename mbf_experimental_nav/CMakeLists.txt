@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(mbf_costmap_nav)
+project(mbf_experimental_nav)
 
 find_package(catkin REQUIRED
   COMPONENTS
@@ -7,7 +7,7 @@ find_package(catkin REQUIRED
   # dynamic_reconfigure
   # geometry_msgs
   mbf_abstract_nav
-  # mbf_costmap_core
+  mbf_experimental_core
   # mbf_msgs
   # mbf_utility
   # nav_core
@@ -18,7 +18,7 @@ find_package(catkin REQUIRED
   # tf
 )
 
-# find_package(Boost COMPONENTS thread chrono REQUIRED)
+find_package(Boost COMPONENTS thread chrono REQUIRED)
 
 # dynamic reconfigure
 # generate_dynamic_reconfigure_options(
@@ -26,37 +26,37 @@ find_package(catkin REQUIRED
 # )
 
 # set(MBF_NAV_CORE_WRAPPER_LIB mbf_nav_core_wrapper)
-# set(MBF_COSTMAP_2D_SERVER_LIB mbf_costmap_server)
-# set(MBF_COSTMAP_2D_SERVER_NODE mbf_costmap_nav)
+set(MBF_EXPERIMENTAL_SERVER_LIB mbf_costmap_server)
+set(MBF_EXPERIMENTAL_SERVER_NODE mbf_experimental_nav)
 
-# catkin_package(
-#   INCLUDE_DIRS include
-#   LIBRARIES ${MBF_COSTMAP_2D_SERVER_LIB}
-#   CATKIN_DEPENDS
-#   actionlib
-#   actionlib_msgs
-#   costmap_2d
-#   dynamic_reconfigure
-#   geometry_msgs
-#   mbf_abstract_nav
-#   mbf_costmap_core
-#   mbf_msgs
-#   mbf_utility
-#   nav_core
-#   nav_msgs
-#   pluginlib
-#   roscpp
-#   std_msgs
-#   std_srvs
-#   tf
-#   DEPENDS Boost
-# )
+catkin_package(
+  INCLUDE_DIRS include
+  # LIBRARIES ${MBF_COSTMAP_2D_SERVER_LIB}
+  CATKIN_DEPENDS
+  # actionlib
+  # actionlib_msgs
+  # costmap_2d
+  # dynamic_reconfigure
+  # geometry_msgs
+  mbf_abstract_nav
+  mbf_experimental_core
+  # mbf_msgs
+  # mbf_utility
+  # nav_core
+  # nav_msgs
+  # pluginlib
+  roscpp
+  # std_msgs
+  # std_srvs
+  # tf
+  DEPENDS Boost
+)
 
-# include_directories(
-#   include
-#   ${catkin_INCLUDE_DIRS}
-#   ${Boost_INCLUDE_DIRS}
-# )
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+)
 
 # add_library(${MBF_NAV_CORE_WRAPPER_LIB}
 #   src/nav_core_wrapper/wrapper_global_planner.cpp
@@ -69,30 +69,31 @@ find_package(catkin REQUIRED
 #   ${Boost_LIBRARIES}
 # )
 
-# add_library(${MBF_COSTMAP_2D_SERVER_LIB}
-#   src/mbf_costmap_nav/costmap_navigation_server.cpp
+add_library(${MBF_EXPERIMENTAL_SERVER_LIB}
+  src/experimental_navigation_server.cpp
 #   src/mbf_costmap_nav/costmap_planner_execution.cpp
 #   src/mbf_costmap_nav/costmap_controller_execution.cpp
 #   src/mbf_costmap_nav/costmap_recovery_execution.cpp
 #   src/mbf_costmap_nav/costmap_wrapper.cpp
 #   src/mbf_costmap_nav/footprint_helper.cpp
-# )
-# add_dependencies(${MBF_COSTMAP_2D_SERVER_LIB} ${catkin_EXPORTED_TARGETS})
+)
+
+add_dependencies(${MBF_EXPERIMENTAL_SERVER_LIB} ${catkin_EXPORTED_TARGETS})
 # add_dependencies(${MBF_COSTMAP_2D_SERVER_LIB} ${MBF_NAV_CORE_WRAPPER_LIB})
-# add_dependencies(${MBF_COSTMAP_2D_SERVER_LIB} ${PROJECT_NAME}_gencfg)
+# add_dependencies(${MBF_EXPERIMENTAL_SERVER_LIB} ${PROJECT_NAME}_gencfg)
 
-# target_link_libraries(${MBF_COSTMAP_2D_SERVER_LIB}
-#   ${MBF_NAV_CORE_WRAPPER_LIB}
-#   ${catkin_LIBRARIES}
-#   ${Boost_LIBRARIES}
-# )
+target_link_libraries(${MBF_EXPERIMENTAL_SERVER_LIB}
+  # ${MBF_NAV_CORE_WRAPPER_LIB}
+  ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
+)
 
-# add_executable(${MBF_COSTMAP_2D_SERVER_NODE} src/move_base_server_node.cpp)
-# add_dependencies(${MBF_COSTMAP_2D_SERVER_NODE} ${MBF_COSTMAP_2D_SERVER_LIB})
-# target_link_libraries(${MBF_COSTMAP_2D_SERVER_NODE}
-#   ${MBF_COSTMAP_2D_SERVER_LIB}
-#   ${catkin_LIBRARIES}
-# )
+add_executable(${MBF_EXPERIMENTAL_SERVER_NODE} src/move_base_server_node.cpp)
+add_dependencies(${MBF_EXPERIMENTAL_SERVER_NODE} ${MBF_EXPERIMENTAL_SERVER_LIB})
+target_link_libraries(${MBF_EXPERIMENTAL_SERVER_NODE}
+  ${MBF_EXPERIMENTAL_SERVER_LIB}
+  ${catkin_LIBRARIES}
+)
 
 # install(TARGETS
 #   ${MBF_NAV_CORE_WRAPPER_LIB} ${MBF_COSTMAP_2D_SERVER_LIB} ${MBF_COSTMAP_2D_SERVER_NODE}

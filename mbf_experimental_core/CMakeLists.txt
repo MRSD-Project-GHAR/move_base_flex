@@ -13,8 +13,8 @@ find_package(catkin REQUIRED
         )
 
 catkin_package(
-    # INCLUDE_DIRS
-        # include
+    INCLUDE_DIRS
+        include
     CATKIN_DEPENDS
             # std_msgs
             # geometry_msgs
@@ -26,7 +26,7 @@ catkin_package(
 )
 
 ## Install project namespaced headers
-# install(DIRECTORY include/${PROJECT_NAME}/
-#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#   FILES_MATCHING PATTERN "*.h"
-#   PATTERN ".svn" EXCLUDE)
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
+  PATTERN ".svn" EXCLUDE)
