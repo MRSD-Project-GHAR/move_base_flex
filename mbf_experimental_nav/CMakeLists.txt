@@ -7,7 +7,8 @@ find_package(catkin REQUIRED
   # dynamic_reconfigure
   # geometry_msgs
   mbf_abstract_nav
-  mbf_experimental_core
+  mbf_abstract_core
+  pluginlib
   # mbf_msgs
   # mbf_utility
   # nav_core
@@ -26,12 +27,12 @@ find_package(Boost COMPONENTS thread chrono REQUIRED)
 # )
 
 # set(MBF_NAV_CORE_WRAPPER_LIB mbf_nav_core_wrapper)
-set(MBF_EXPERIMENTAL_SERVER_LIB mbf_costmap_server)
+set(MBF_EXPERIMENTAL_SERVER_LIB mbf_experimental_server)
 set(MBF_EXPERIMENTAL_SERVER_NODE mbf_experimental_nav)
 
 catkin_package(
   INCLUDE_DIRS include
-  # LIBRARIES ${MBF_COSTMAP_2D_SERVER_LIB}
+  LIBRARIES ${MBF_EXPERIMENTAL_SERVER_LIB}
   CATKIN_DEPENDS
   # actionlib
   # actionlib_msgs
@@ -39,12 +40,12 @@ catkin_package(
   # dynamic_reconfigure
   # geometry_msgs
   mbf_abstract_nav
-  mbf_experimental_core
+  mbf_abstract_core
   # mbf_msgs
   # mbf_utility
   # nav_core
   # nav_msgs
-  # pluginlib
+  pluginlib
   roscpp
   # std_msgs
   # std_srvs
@@ -95,16 +96,17 @@ target_link_libraries(${MBF_EXPERIMENTAL_SERVER_NODE}
   ${catkin_LIBRARIES}
 )
 
-# install(TARGETS
-#   ${MBF_NAV_CORE_WRAPPER_LIB} ${MBF_COSTMAP_2D_SERVER_LIB} ${MBF_COSTMAP_2D_SERVER_NODE}
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(TARGETS
+  # ${MBF_NAV_CORE_WRAPPER_LIB} ${MBF_EXPERIMENTAL_SERVER_LIB} ${MBF_EXPERIMENTAL_SERVER_NODE}
+  ${MBF_EXPERIMENTAL_SERVER_LIB} ${MBF_EXPERIMENTAL_SERVER_NODE}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
-# install(DIRECTORY include/${PROJECT_NAME}/
-#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-# )
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+)
 
 # catkin_install_python(PROGRAMS scripts/move_base_legacy_relay.py
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

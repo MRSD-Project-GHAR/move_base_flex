@@ -1,7 +1,8 @@
 #pragma once
 
 #include <mbf_abstract_nav/abstract_navigation_server.h>
-
+#include <pluginlib/class_loader.hpp>
+// #include <mbf_experimental_core/experimental_planner.hpp>
 
 // #include <std_srvs/Empty.h>
 // #include <mbf_msgs/CheckPath.h>
@@ -19,7 +20,7 @@
 // #include "mbf_costmap_nav/costmap_wrapper.h"
 
 // Change this to std::unordered_map, once we move to C++11.
-// #include <boost/unordered_map.hpp>
+#include <boost/unordered_map.hpp>
 #include <boost/shared_ptr.hpp>
 
 // #include <string>
@@ -60,7 +61,7 @@ public:
   /**
    * @brief Destructor
    */
-//   virtual ~CostmapNavigationServer();
+  virtual ~ExperimentalNavigationServer();
 
 //   virtual void stop();
 
@@ -197,7 +198,10 @@ private:
 //   pluginlib::ClassLoader<nav_core::RecoveryBehavior> nav_core_recovery_plugin_loader_;
 //   pluginlib::ClassLoader<mbf_costmap_core::CostmapController> controller_plugin_loader_;
 //   pluginlib::ClassLoader<nav_core::BaseLocalPlanner> nav_core_controller_plugin_loader_;
-//   pluginlib::ClassLoader<mbf_costmap_core::CostmapPlanner> planner_plugin_loader_;
+  // pluginlib::ClassLoader<mbf_abstract_core::AbstractPlanner> planner_plugin_loader_;
+  pluginlib::ClassLoader<mbf_abstract_core::AbstractPlanner> planner_plugin_loader_;
+
+  // class_loader::MultiLibraryClassLoader::MultiLibraryClassLoader(bool);
 //   pluginlib::ClassLoader<nav_core::BaseGlobalPlanner> nav_core_planner_plugin_loader_;
 
   //! Dynamic reconfigure server for the mbf_costmap2d_specific part

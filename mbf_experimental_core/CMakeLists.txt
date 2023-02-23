@@ -25,8 +25,16 @@ catkin_package(
             # nav_core
 )
 
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+#   ${Boost_INCLUDE_DIRS}
+)
+
+add_library(experimental_planner_lib src/experimental_planner.cpp)
+
 ## Install project namespaced headers
-install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h"
-  PATTERN ".svn" EXCLUDE)
+# install(DIRECTORY include/${PROJECT_NAME}/
+#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+#   FILES_MATCHING PATTERN "*.h"
+#   PATTERN ".svn" EXCLUDE)

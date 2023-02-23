@@ -1,0 +1,4 @@
+# planners:
+planners:
+  - name: ExperimentalPlanner
+    type: mbf_experimental_core/ExperimentalPlanner

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <mbf_abstract_core/abstract_planner.h>
+#include <pluginlib/class_list_macros.h>
+
 // #include <costmap_2d/costmap_2d_ros.h>
 
 namespace mbf_experimental_core
@@ -41,33 +43,39 @@ public:
    *         INTERNAL_ERROR  = 60
    *         71..99 are reserved as plugin specific errors
    */
-  virtual uint32_t makePlan(const geometry_msgs::PoseStamped& start, const geometry_msgs::PoseStamped& goal,
-                            std::vector<geometry_msgs::PoseStamped>& plan, double& cost) = 0;
+
+  uint32_t makePlan(const geometry_msgs::PoseStamped &start, const geometry_msgs::PoseStamped &goal,
+                                double tolerance, std::vector<geometry_msgs::PoseStamped> &plan, double &cost,
+                                std::string &message);
 
   /**
    * @brief Requests the planner to cancel, e.g. if it takes too much time.
    * @remark New on MBF API
    * @return True if a cancel has been successfully requested, false if not implemented.
    */
-  virtual bool cancel() = 0;
+  bool cancel();
 
   /**
    * @brief Initialization function for the ExperimentalPlanner
    * @param name The name of this planner
    * @param costmap_ros A pointer to the ROS wrapper of the costmap to use for planning
    */
-  virtual void initialize(std::string name, int map) = 0;
+  // void initialize(std::string name, int map);
 
   /**
    * @brief  Virtual destructor for the interface
    */
-  virtual ~ExperimentalPlanner()
-  {
-  }
+  //  ~ExperimentalPlanner()
+  // {
+  // }
 
 protected:
-  ExperimentalPlanner()
-  {
-  }
+  // ExperimentalPlanner()
+  // {
+  // }
+
+private:
+  // pluginlib::ClassLoader<mbf_experimental_core::ExperimentalPlanner> planner_plugin_loader_;
+
 };
 }  // namespace mbf_experimental_core
