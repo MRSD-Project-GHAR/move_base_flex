@@ -7,7 +7,9 @@ namespace mbf_experimental_nav
 ExperimentalNavigationServer::ExperimentalNavigationServer(const TFPtr& tf_listener_ptr)
   // : AbstractNavigationServer(tf_listener_ptr)
   : mbf_abstract_nav::AbstractNavigationServer(tf_listener_ptr), 
-    planner_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractPlanner")
+    planner_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractPlanner"),
+    controller_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractController")
+
 {
   std::cout << "Constructor Called!\n\n";
 
@@ -18,6 +20,7 @@ ExperimentalNavigationServer::ExperimentalNavigationServer(const TFPtr& tf_liste
 
 ExperimentalNavigationServer::~ExperimentalNavigationServer() {
   planner_plugin_manager_.clearPlugins();
+  controller_plugin_manager_.clearPlugins();
 }
 
 mbf_abstract_core::AbstractPlanner::Ptr ExperimentalNavigationServer::loadPlannerPlugin(const std::string& planner_type)
@@ -51,9 +54,26 @@ bool ExperimentalNavigationServer::initializePlannerPlugin(const std::string& na
 mbf_abstract_core::AbstractController::Ptr
 ExperimentalNavigationServer::loadControllerPlugin(const std::string& controller_type)
 {
-  std::cout << "Dummy controller plugin loaded\n\n";
+  // std::cout << "Dummy controller plugin loaded\n\n";
   //   return true;
-  return NULL;
+  // return NULL;
+
+  mbf_abstract_core::AbstractController::Ptr controller_ptr = NULL;
+  try
+  {
+    controller_ptr = boost::static_pointer_cast<mbf_abstract_core::AbstractController>(
+        controller_plugin_loader_.createInstance(controller_type));
+
+    std::string controller_name = controller_plugin_loader_.getName(controller_type);
+    ROS_DEBUG_STREAM("mbf_costmap_core-based controller plugin " << controller_name << " loaded.");
+  }
+  catch (const pluginlib::PluginlibException &ex_mbf_core)
+  {
+    ROS_DEBUG_STREAM("Failed to load the " << controller_type << " controller." << ex_mbf_core.what());
+                                          // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
+  }
+
+  return controller_ptr;
 }
 
 bool ExperimentalNavigationServer::initializeControllerPlugin(

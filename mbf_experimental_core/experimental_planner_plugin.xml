@@ -1,5 +1,0 @@
-<library path="lib/libexperimental_planner_lib">
-  <class name="mbf_experimental_core/ExperimentalPlanner" type="mbf_experimental_core::ExperimentalPlanner" base_class_type="mbf_abstract_core::AbstractPlanner">
-    <description>This is a dummy planner</description>
-  </class>
-</library>

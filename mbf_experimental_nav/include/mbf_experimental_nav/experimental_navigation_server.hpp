@@ -196,10 +196,10 @@ private:
 
 //   pluginlib::ClassLoader<mbf_costmap_core::CostmapRecovery> recovery_plugin_loader_;
 //   pluginlib::ClassLoader<nav_core::RecoveryBehavior> nav_core_recovery_plugin_loader_;
-//   pluginlib::ClassLoader<mbf_costmap_core::CostmapController> controller_plugin_loader_;
 //   pluginlib::ClassLoader<nav_core::BaseLocalPlanner> nav_core_controller_plugin_loader_;
   // pluginlib::ClassLoader<mbf_abstract_core::AbstractPlanner> planner_plugin_loader_;
   pluginlib::ClassLoader<mbf_abstract_core::AbstractPlanner> planner_plugin_loader_;
+  pluginlib::ClassLoader<mbf_abstract_core::AbstractController> controller_plugin_loader_;
 
   // class_loader::MultiLibraryClassLoader::MultiLibraryClassLoader(bool);
 //   pluginlib::ClassLoader<nav_core::BaseGlobalPlanner> nav_core_planner_plugin_loader_;

@@ -31,7 +31,10 @@ include_directories(
 #   ${Boost_INCLUDE_DIRS}
 )
 
-add_library(experimental_planner_lib src/experimental_planner.cpp)
+add_library(experimental_nav_lib
+    src/experimental_planner.cpp
+    src/experimental_controller.cpp
+)
 
 ## Install project namespaced headers
 # install(DIRECTORY include/${PROJECT_NAME}/

@@ -2,3 +2,7 @@
 planners:
   - name: ExperimentalPlanner
     type: mbf_experimental_core/ExperimentalPlanner
+
+controllers:
+  - name: ExperimentalController
+    type: mbf_experimental_core/ExperimentalController

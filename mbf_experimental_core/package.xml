@@ -26,10 +26,13 @@
     <!-- <depend>tf</depend> -->
 
   <export>
-    <mbf_abstract_core plugin="${prefix}/experimental_planner_plugin.xml" />
+    <mbf_abstract_core plugin="${prefix}/experimental_nav_plugins.xml" />
   </export>
 
 <build_depend>experimental_planner</build_depend>
   <exec_depend>experimental_planner</exec_depend>
+
+  <build_depend>experimental_controller</build_depend>
+  <exec_depend>experimental_controller</exec_depend>
 
 </package>
