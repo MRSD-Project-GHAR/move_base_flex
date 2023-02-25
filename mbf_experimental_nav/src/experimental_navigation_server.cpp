@@ -8,6 +8,7 @@ ExperimentalNavigationServer::ExperimentalNavigationServer(const TFPtr& tf_liste
   // : AbstractNavigationServer(tf_listener_ptr)
   : mbf_abstract_nav::AbstractNavigationServer(tf_listener_ptr), 
     planner_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractPlanner"),
+    recovery_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractRecovery"),
     controller_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractController")
 
 {
@@ -86,9 +87,22 @@ bool ExperimentalNavigationServer::initializeControllerPlugin(
 mbf_abstract_core::AbstractRecovery::Ptr
 ExperimentalNavigationServer::loadRecoveryPlugin(const std::string& recovery_type)
 {
-  std::cout << "Dummy Recovery plugin loaded\n\n";
-  //   return true;
-  return NULL;
+  mbf_abstract_core::AbstractRecovery::Ptr recovery_ptr = NULL;
+  try
+  {
+    recovery_ptr = boost::static_pointer_cast<mbf_abstract_core::AbstractRecovery>(
+        recovery_plugin_loader_.createInstance(recovery_type));
+
+    std::string recovery_name = recovery_plugin_loader_.getName(recovery_type);
+    ROS_DEBUG_STREAM("mbf_costmap_core-based recovery plugin " << recovery_name << " loaded.");
+  }
+  catch (const pluginlib::PluginlibException &ex_mbf_core)
+  {
+    ROS_DEBUG_STREAM("Failed to load the " << recovery_type << " recovery." << ex_mbf_core.what());
+                                          // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
+  }
+
+  return recovery_ptr;
 }
 
 bool ExperimentalNavigationServer::initializeRecoveryPlugin(

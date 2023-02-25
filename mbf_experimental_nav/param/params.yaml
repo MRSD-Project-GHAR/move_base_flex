@@ -6,3 +6,7 @@ planners:
 controllers:
   - name: ExperimentalController
     type: mbf_experimental_core/ExperimentalController
+
+recovery_behaviors:
+  - name: ExperimentalRecovery
+    type: mbf_experimental_core/ExperimentalRecovery

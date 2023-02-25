@@ -194,7 +194,7 @@ private:
    */
 //   void reconfigure(mbf_costmap_nav::MoveBaseFlexConfig &config, uint32_t level);
 
-//   pluginlib::ClassLoader<mbf_costmap_core::CostmapRecovery> recovery_plugin_loader_;
+  pluginlib::ClassLoader<mbf_abstract_core::AbstractRecovery> recovery_plugin_loader_;
 //   pluginlib::ClassLoader<nav_core::RecoveryBehavior> nav_core_recovery_plugin_loader_;
 //   pluginlib::ClassLoader<nav_core::BaseLocalPlanner> nav_core_controller_plugin_loader_;
   // pluginlib::ClassLoader<mbf_abstract_core::AbstractPlanner> planner_plugin_loader_;

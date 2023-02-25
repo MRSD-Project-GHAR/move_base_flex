@@ -7,4 +7,8 @@
   <class name="mbf_experimental_core/ExperimentalController" type="mbf_experimental_core::ExperimentalController" base_class_type="mbf_abstract_core::AbstractController">
     <description>This is a dummy controller</description>
   </class>
+
+  <class name="mbf_experimental_core/ExperimentalRecovery" type="mbf_experimental_core::ExperimentalRecovery" base_class_type="mbf_abstract_core::AbstractRecovery">
+    <description>This is a dummy recovery behavior</description>
+  </class>
 </library>

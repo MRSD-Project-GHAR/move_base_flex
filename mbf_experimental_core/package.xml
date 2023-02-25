@@ -29,10 +29,13 @@
     <mbf_abstract_core plugin="${prefix}/experimental_nav_plugins.xml" />
   </export>
 
-<build_depend>experimental_planner</build_depend>
+  <build_depend>experimental_planner</build_depend>
   <exec_depend>experimental_planner</exec_depend>
 
   <build_depend>experimental_controller</build_depend>
   <exec_depend>experimental_controller</exec_depend>
+
+  <build_depend>experimental_recovery</build_depend>
+  <exec_depend>experimental_recovery</exec_depend>
 
 </package>

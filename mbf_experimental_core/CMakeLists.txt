@@ -34,6 +34,7 @@ include_directories(
 add_library(experimental_nav_lib
     src/experimental_planner.cpp
     src/experimental_controller.cpp
+    src/experimental_recovery.cpp
 )
 
 ## Install project namespaced headers
