@@ -22,6 +22,7 @@ ExperimentalNavigationServer::ExperimentalNavigationServer(const TFPtr& tf_liste
 ExperimentalNavigationServer::~ExperimentalNavigationServer() {
   planner_plugin_manager_.clearPlugins();
   controller_plugin_manager_.clearPlugins();
+  recovery_plugin_manager_.clearPlugins();
 }
 
 mbf_abstract_core::AbstractPlanner::Ptr ExperimentalNavigationServer::loadPlannerPlugin(const std::string& planner_type)
