@@ -70,7 +70,9 @@ public:
    */
   bool cancel();
 
-protected:
+private:
+
+  bool cancel_requested_ = false;
   /**
    * @brief Constructor
    */

@@ -33,7 +33,11 @@
     <!-- <rosparam file="$(find turtlebot3_mbf)/param/move_base.yaml" command="load"/> -->
     <rosparam file="$(find mbf_experimental_nav)/param/params.yaml" command="load" />
     <param name="base_global_planner" value="mbf_experimental_core/ExperimentalPlanner"/>
+    <param name="global_frame" value="odom"/>
+    <param name="robot_frame" value="base_footprint"/>
 
   </node>
+
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="link1_broadcaster" args="1 0 0 0 0 0 1 map base_link" /> -->
 
  </launch>

@@ -45,10 +45,17 @@ uint32_t ExperimentalPlanner::makePlan(const geometry_msgs::PoseStamped& start, 
                                        std::string& message)
 
 {
+
+  if (cancel_requested_) {
+    cancel_requested_ = false;
+    return 51;
+  }
   std::cout << "Made a dummy plan!" << std::endl;
   // plan[0].pose.position.x = 10.0;
   geometry_msgs::PoseStamped dummy_plan;
   dummy_plan.pose.position.x = 10.0;
+  dummy_plan.pose.orientation.w = 1.0;
+  dummy_plan.header.frame_id = "odom";
   plan.push_back(dummy_plan);
 
   return 0;
@@ -62,6 +69,7 @@ uint32_t ExperimentalPlanner::makePlan(const geometry_msgs::PoseStamped& start, 
 bool ExperimentalPlanner::cancel()
 {
   std::cout << "Plan is cancelled!";
+  cancel_requested_ = true;
   return true;
 }
 

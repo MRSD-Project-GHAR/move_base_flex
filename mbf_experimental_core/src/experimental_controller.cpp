@@ -52,7 +52,12 @@ uint32_t ExperimentalController::computeVelocityCommands(const geometry_msgs::Po
                                                          geometry_msgs::TwistStamped& cmd_vel, std::string& message)
 {
     std::cout << "Computing dummy velocity commands! \n\n";
-    std::cout << "The pose I received is :" << pose << std::endl;
+    // std::cout << "The pose I received is :" << pose << std::endl;
+    if (cancel_requested_) {
+        cancel_requested_ = false;
+        return 101;
+    }
+
     return 0;
 
 }
@@ -87,7 +92,8 @@ bool ExperimentalController::setPlan(const std::vector<geometry_msgs::PoseStampe
 bool ExperimentalController::cancel()
 {
     std::cout << "Cancelling!\n";
-    return 0;
+    cancel_requested_ = true;
+    return true;
 }
 
 // protected:

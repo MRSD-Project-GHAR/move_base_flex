@@ -12,17 +12,20 @@ ExperimentalNavigationServer::ExperimentalNavigationServer(const TFPtr& tf_liste
     controller_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractController")
 
 {
-  std::cout << "Constructor Called!\n\n";
-
   initializeServerComponents();
 
-
+  startActionServers();
 }
 
 ExperimentalNavigationServer::~ExperimentalNavigationServer() {
   planner_plugin_manager_.clearPlugins();
   controller_plugin_manager_.clearPlugins();
   recovery_plugin_manager_.clearPlugins();
+  
+  action_server_recovery_ptr_.reset();
+  action_server_exe_path_ptr_.reset();
+  action_server_get_path_ptr_.reset();
+  action_server_move_base_ptr_.reset();
 }
 
 mbf_abstract_core::AbstractPlanner::Ptr ExperimentalNavigationServer::loadPlannerPlugin(const std::string& planner_type)

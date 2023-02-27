@@ -75,6 +75,7 @@ protected:
   // }
 
 private:
+  bool cancel_requested_ = false;
   // pluginlib::ClassLoader<mbf_experimental_core::ExperimentalPlanner> planner_plugin_loader_;
 
 };
