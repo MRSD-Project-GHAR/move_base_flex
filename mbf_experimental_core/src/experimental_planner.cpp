@@ -1,5 +1,9 @@
 #include <mbf_experimental_core/experimental_planner.hpp>
 
+// This is what exports this class as ROS plugin. The syntax is PLUGINLIB_EXPORT_CLASS(derived class, base class)
+// You need to add some stuff in package.xml and CMakeLists.txt as well. The best way to know what all you have to do to
+// export a plugin is to go through this ROS tutorial
+// http://wiki.ros.org/pluginlib/Tutorials/Writing%20and%20Using%20a%20Simple%20Plugin
 PLUGINLIB_EXPORT_CLASS(mbf_experimental_core::ExperimentalPlanner, mbf_abstract_core::AbstractPlanner)
 
 namespace mbf_experimental_core
