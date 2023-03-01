@@ -32,8 +32,8 @@ namespace mbf_experimental_nav
  * @brief Classes belonging to the Move Base Server level.
  */
 
-
-// typedef boost::shared_ptr<dynamic_reconfigure::Server<mbf_experimental_nav::MoveBaseFlexConfig> > DynamicReconfigureServerCostmapNav;
+// typedef boost::shared_ptr<dynamic_reconfigure::Server<mbf_experimental_nav::MoveBaseFlexConfig> >
+// DynamicReconfigureServerCostmapNav;
 
 /// @brief A mapping from a string to a map-ptr.
 // typedef boost::unordered_map<std::string, CostmapWrapper::Ptr> StringToMap;
@@ -49,33 +49,31 @@ namespace mbf_experimental_nav
 class ExperimentalNavigationServer : public mbf_abstract_nav::AbstractNavigationServer
 {
 public:
-
-//   typedef boost::shared_ptr<CostmapNavigationServer> Ptr;
+  //   typedef boost::shared_ptr<CostmapNavigationServer> Ptr;
 
   /**
    * @brief Constructor
    * @param tf_listener_ptr Shared pointer to a common TransformListener
    */
-  ExperimentalNavigationServer(const TFPtr &tf_listener_ptr);
+  ExperimentalNavigationServer(const TFPtr& tf_listener_ptr);
 
   /**
    * @brief Destructor
    */
   virtual ~ExperimentalNavigationServer();
 
-//   virtual void stop();
+  //   virtual void stop();
 
 private:
-
   /**
    * @brief Create a new planner execution.
    * @param plugin_name Name of the planner to use.
    * @param plugin_ptr Shared pointer to the plugin to use.
    * @return Shared pointer to a new @ref planner_execution "PlannerExecution".
    */
-//   virtual mbf_abstract_nav::AbstractPlannerExecution::Ptr newPlannerExecution(
-//       const std::string &plugin_name,
-//       const mbf_abstract_core::AbstractPlanner::Ptr &plugin_ptr);
+  //   virtual mbf_abstract_nav::AbstractPlannerExecution::Ptr newPlannerExecution(
+  //       const std::string &plugin_name,
+  //       const mbf_abstract_core::AbstractPlanner::Ptr &plugin_ptr);
 
   /**
    * @brief Create a new controller execution.
@@ -83,9 +81,9 @@ private:
    * @param plugin_ptr Shared pointer to the plugin to use.
    * @return Shared pointer to a new @ref controller_execution "ControllerExecution".
    */
-//   virtual mbf_abstract_nav::AbstractControllerExecution::Ptr newControllerExecution(
-//       const std::string &plugin_name,
-//       const mbf_abstract_core::AbstractController::Ptr &plugin_ptr);
+  //   virtual mbf_abstract_nav::AbstractControllerExecution::Ptr newControllerExecution(
+  //       const std::string &plugin_name,
+  //       const mbf_abstract_core::AbstractController::Ptr &plugin_ptr);
 
   /**
    * @brief Create a new recovery behavior execution.
@@ -93,16 +91,16 @@ private:
    * @param plugin_ptr Shared pointer to the plugin to use
    * @return Shared pointer to a new @ref recovery_execution "RecoveryExecution".
    */
-//   virtual mbf_abstract_nav::AbstractRecoveryExecution::Ptr newRecoveryExecution(
-//       const std::string &plugin_name,
-//       const mbf_abstract_core::AbstractRecovery::Ptr &plugin_ptr);
+  //   virtual mbf_abstract_nav::AbstractRecoveryExecution::Ptr newRecoveryExecution(
+  //       const std::string &plugin_name,
+  //       const mbf_abstract_core::AbstractRecovery::Ptr &plugin_ptr);
 
   /**
    * @brief Loads the plugin associated with the given planner_type parameter.
    * @param planner_type The type of the planner plugin to load.
    * @return true, if the local planner plugin was successfully loaded.
    */
-  virtual mbf_abstract_core::AbstractPlanner::Ptr loadPlannerPlugin(const std::string &planner_type);
+  virtual mbf_abstract_core::AbstractPlanner::Ptr loadPlannerPlugin(const std::string& planner_type);
 
   /**
    * @brief Initializes the controller plugin with its name and pointer to the costmap
@@ -110,10 +108,8 @@ private:
    * @param planner_ptr pointer to the planner object which corresponds to the name param
    * @return true if init succeeded, false otherwise
    */
-  virtual bool initializePlannerPlugin(
-      const std::string &name,
-      const mbf_abstract_core::AbstractPlanner::Ptr &planner_ptr
-  );
+  virtual bool initializePlannerPlugin(const std::string& name,
+                                       const mbf_abstract_core::AbstractPlanner::Ptr& planner_ptr);
 
   /**
    * @brief Loads the plugin associated with the given controller type parameter
@@ -121,7 +117,7 @@ private:
    * @return A shared pointer to a new loaded controller, if the controller plugin was loaded successfully,
    *         an empty pointer otherwise.
    */
-  virtual mbf_abstract_core::AbstractController::Ptr loadControllerPlugin(const std::string &controller_type);
+  virtual mbf_abstract_core::AbstractController::Ptr loadControllerPlugin(const std::string& controller_type);
 
   /**
    * @brief Initializes the controller plugin with its name, a pointer to the TransformListener
@@ -130,17 +126,15 @@ private:
    * @param controller_ptr pointer to the controller object which corresponds to the name param
    * @return true if init succeeded, false otherwise
    */
-  virtual bool initializeControllerPlugin(
-      const std::string &name,
-      const mbf_abstract_core::AbstractController::Ptr &controller_ptr
-  );
+  virtual bool initializeControllerPlugin(const std::string& name,
+                                          const mbf_abstract_core::AbstractController::Ptr& controller_ptr);
 
   /**
    * @brief Loads a Recovery plugin associated with given recovery type parameter
    * @param recovery_name The name of the Recovery plugin
    * @return A shared pointer to a Recovery plugin, if the plugin was loaded successfully, an empty pointer otherwise.
    */
-  virtual mbf_abstract_core::AbstractRecovery::Ptr loadRecoveryPlugin(const std::string &recovery_type);
+  virtual mbf_abstract_core::AbstractRecovery::Ptr loadRecoveryPlugin(const std::string& recovery_type);
 
   /**
    * @brief Initializes a recovery behavior plugin with its name and pointers to the global and local costmaps
@@ -148,9 +142,8 @@ private:
    * @param behavior_ptr pointer to the recovery behavior object which corresponds to the name param
    * @return true if init succeeded, false otherwise
    */
-  virtual bool initializeRecoveryPlugin(
-      const std::string &name,
-      const mbf_abstract_core::AbstractRecovery::Ptr &behavior_ptr);
+  virtual bool initializeRecoveryPlugin(const std::string& name,
+                                        const mbf_abstract_core::AbstractRecovery::Ptr& behavior_ptr);
 
   /**
    * @brief Callback method for the check_point_cost service
@@ -158,8 +151,8 @@ private:
    * @param response Response object, see the mbf_msgs/CheckPoint service definition file.
    * @return true, if the service completed successfully, false otherwise
    */
-//   bool callServiceCheckPointCost(mbf_msgs::CheckPoint::Request &request,
-                                //  mbf_msgs::CheckPoint::Response &response);
+  //   bool callServiceCheckPointCost(mbf_msgs::CheckPoint::Request &request,
+  //  mbf_msgs::CheckPoint::Response &response);
 
   /**
    * @brief Callback method for the check_pose_cost service
@@ -167,8 +160,8 @@ private:
    * @param response Response object, see the mbf_msgs/CheckPose service definition file.
    * @return true, if the service completed successfully, false otherwise
    */
-//   bool callServiceCheckPoseCost(mbf_msgs::CheckPose::Request &request,
-                                // mbf_msgs::CheckPose::Response &response);
+  //   bool callServiceCheckPoseCost(mbf_msgs::CheckPose::Request &request,
+  // mbf_msgs::CheckPose::Response &response);
 
   /**
    * @brief Callback method for the check_path_cost service
@@ -176,8 +169,8 @@ private:
    * @param response Response object, see the mbf_msgs/CheckPath service definition file.
    * @return true, if the service completed successfully, false otherwise
    */
-//   bool callServiceCheckPathCost(mbf_msgs::CheckPath::Request &request,
-                                // mbf_msgs::CheckPath::Response &response);
+  //   bool callServiceCheckPathCost(mbf_msgs::CheckPath::Request &request,
+  // mbf_msgs::CheckPath::Response &response);
 
   /**
    * @brief Callback method for the make_plan service
@@ -185,62 +178,62 @@ private:
    * @param response Empty response object.
    * @return true, if the service completed successfully, false otherwise
    */
-//   bool callServiceClearCostmaps(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
+  //   bool callServiceClearCostmaps(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
 
   /**
    * @brief Reconfiguration method called by dynamic reconfigure.
    * @param config Configuration parameters. See the MoveBaseFlexConfig definition.
    * @param level bit mask, which parameters are set.
    */
-//   void reconfigure(mbf_costmap_nav::MoveBaseFlexConfig &config, uint32_t level);
+  //   void reconfigure(mbf_costmap_nav::MoveBaseFlexConfig &config, uint32_t level);
 
   pluginlib::ClassLoader<mbf_abstract_core::AbstractRecovery> recovery_plugin_loader_;
-//   pluginlib::ClassLoader<nav_core::RecoveryBehavior> nav_core_recovery_plugin_loader_;
-//   pluginlib::ClassLoader<nav_core::BaseLocalPlanner> nav_core_controller_plugin_loader_;
+  //   pluginlib::ClassLoader<nav_core::RecoveryBehavior> nav_core_recovery_plugin_loader_;
+  //   pluginlib::ClassLoader<nav_core::BaseLocalPlanner> nav_core_controller_plugin_loader_;
   // pluginlib::ClassLoader<mbf_abstract_core::AbstractPlanner> planner_plugin_loader_;
   pluginlib::ClassLoader<mbf_abstract_core::AbstractPlanner> planner_plugin_loader_;
   pluginlib::ClassLoader<mbf_abstract_core::AbstractController> controller_plugin_loader_;
 
   // class_loader::MultiLibraryClassLoader::MultiLibraryClassLoader(bool);
-//   pluginlib::ClassLoader<nav_core::BaseGlobalPlanner> nav_core_planner_plugin_loader_;
+  //   pluginlib::ClassLoader<nav_core::BaseGlobalPlanner> nav_core_planner_plugin_loader_;
 
   //! Dynamic reconfigure server for the mbf_costmap2d_specific part
-//   DynamicReconfigureServerCostmapNav dsrv_costmap_;
+  //   DynamicReconfigureServerCostmapNav dsrv_costmap_;
 
   //! last configuration save
-//   mbf_costmap_nav::MoveBaseFlexConfig last_config_;
+  //   mbf_costmap_nav::MoveBaseFlexConfig last_config_;
 
   //! the default parameter configuration save
-//   mbf_costmap_nav::MoveBaseFlexConfig default_config_;
+  //   mbf_costmap_nav::MoveBaseFlexConfig default_config_;
 
   //! true, if the dynamic reconfigure has been setup
-//   bool setup_reconfigure_;
+  //   bool setup_reconfigure_;
 
   //! Shared pointer to the common local costmap
-//   const CostmapWrapper::Ptr local_costmap_ptr_;
+  //   const CostmapWrapper::Ptr local_costmap_ptr_;
 
   //! Shared pointer to the common global costmap
-//   const CostmapWrapper::Ptr global_costmap_ptr_;
+  //   const CostmapWrapper::Ptr global_costmap_ptr_;
 
   //! Maps planner names to the costmap ptr.
-//   StringToMap planner_name_to_costmap_ptr_;
+  //   StringToMap planner_name_to_costmap_ptr_;
 
   //! Maps the controller names to the costmap ptr.
-//   StringToMap controller_name_to_costmap_ptr_;
+  //   StringToMap controller_name_to_costmap_ptr_;
 
   //! Service Server for the check_point_cost service
-//   ros::ServiceServer check_point_cost_srv_;
+  //   ros::ServiceServer check_point_cost_srv_;
 
   //! Service Server for the check_pose_cost service
-//   ros::ServiceServer check_pose_cost_srv_;
+  //   ros::ServiceServer check_pose_cost_srv_;
 
   //! Service Server for the check_path_cost service
-//   ros::ServiceServer check_path_cost_srv_;
+  //   ros::ServiceServer check_path_cost_srv_;
 
   //! Service Server for the clear_costmap service
-//   ros::ServiceServer clear_costmaps_srv_;
+  //   ros::ServiceServer clear_costmaps_srv_;
 };
 
-} /* namespace mbf_costmap_nav */
+}  // namespace mbf_experimental_nav
 
 // #endif /* MBF_COSTMAP_NAV__COSTMAP_NAVIGATION_SERVER_H_ */

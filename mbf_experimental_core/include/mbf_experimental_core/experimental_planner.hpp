@@ -44,9 +44,8 @@ public:
    *         71..99 are reserved as plugin specific errors
    */
 
-  uint32_t makePlan(const geometry_msgs::PoseStamped &start, const geometry_msgs::PoseStamped &goal,
-                                double tolerance, std::vector<geometry_msgs::PoseStamped> &plan, double &cost,
-                                std::string &message);
+  uint32_t makePlan(const geometry_msgs::PoseStamped& start, const geometry_msgs::PoseStamped& goal, double tolerance,
+                    std::vector<geometry_msgs::PoseStamped>& plan, double& cost, std::string& message);
 
   /**
    * @brief Requests the planner to cancel, e.g. if it takes too much time.
@@ -77,6 +76,5 @@ protected:
 private:
   bool cancel_requested_ = false;
   // pluginlib::ClassLoader<mbf_experimental_core::ExperimentalPlanner> planner_plugin_loader_;
-
 };
 }  // namespace mbf_experimental_core

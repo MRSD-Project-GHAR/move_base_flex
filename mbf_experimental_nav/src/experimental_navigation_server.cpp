@@ -6,10 +6,10 @@ namespace mbf_experimental_nav
 {
 ExperimentalNavigationServer::ExperimentalNavigationServer(const TFPtr& tf_listener_ptr)
   // : AbstractNavigationServer(tf_listener_ptr)
-  : mbf_abstract_nav::AbstractNavigationServer(tf_listener_ptr), 
-    planner_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractPlanner"),
-    recovery_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractRecovery"),
-    controller_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractController")
+  : mbf_abstract_nav::AbstractNavigationServer(tf_listener_ptr)
+  , planner_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractPlanner")
+  , recovery_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractRecovery")
+  , controller_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractController")
 
 {
   initializeServerComponents();
@@ -17,11 +17,12 @@ ExperimentalNavigationServer::ExperimentalNavigationServer(const TFPtr& tf_liste
   startActionServers();
 }
 
-ExperimentalNavigationServer::~ExperimentalNavigationServer() {
+ExperimentalNavigationServer::~ExperimentalNavigationServer()
+{
   planner_plugin_manager_.clearPlugins();
   controller_plugin_manager_.clearPlugins();
   recovery_plugin_manager_.clearPlugins();
-  
+
   action_server_recovery_ptr_.reset();
   action_server_exe_path_ptr_.reset();
   action_server_get_path_ptr_.reset();
@@ -30,22 +31,22 @@ ExperimentalNavigationServer::~ExperimentalNavigationServer() {
 
 mbf_abstract_core::AbstractPlanner::Ptr ExperimentalNavigationServer::loadPlannerPlugin(const std::string& planner_type)
 {
-    mbf_abstract_core::AbstractPlanner::Ptr planner_ptr = NULL;
-    try
-    {
-      planner_ptr = boost::static_pointer_cast<mbf_abstract_core::AbstractPlanner>(
-          planner_plugin_loader_.createInstance(planner_type));
+  mbf_abstract_core::AbstractPlanner::Ptr planner_ptr = NULL;
+  try
+  {
+    planner_ptr = boost::static_pointer_cast<mbf_abstract_core::AbstractPlanner>(
+        planner_plugin_loader_.createInstance(planner_type));
 
-      std::string planner_name = planner_plugin_loader_.getName(planner_type);
-      ROS_DEBUG_STREAM("mbf_costmap_core-based planner plugin " << planner_name << " loaded.");
-    }
-    catch (const pluginlib::PluginlibException &ex_mbf_core)
-    {
-      ROS_DEBUG_STREAM("Failed to load the " << planner_type << " planner." << ex_mbf_core.what());
-                                            // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
-    }
+    std::string planner_name = planner_plugin_loader_.getName(planner_type);
+    ROS_DEBUG_STREAM("mbf_costmap_core-based planner plugin " << planner_name << " loaded.");
+  }
+  catch (const pluginlib::PluginlibException& ex_mbf_core)
+  {
+    ROS_DEBUG_STREAM("Failed to load the " << planner_type << " planner." << ex_mbf_core.what());
+    // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
+  }
 
-    return planner_ptr;
+  return planner_ptr;
   // return NULL;
 }
 
@@ -72,10 +73,10 @@ ExperimentalNavigationServer::loadControllerPlugin(const std::string& controller
     std::string controller_name = controller_plugin_loader_.getName(controller_type);
     ROS_DEBUG_STREAM("mbf_costmap_core-based controller plugin " << controller_name << " loaded.");
   }
-  catch (const pluginlib::PluginlibException &ex_mbf_core)
+  catch (const pluginlib::PluginlibException& ex_mbf_core)
   {
     ROS_DEBUG_STREAM("Failed to load the " << controller_type << " controller." << ex_mbf_core.what());
-                                          // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
+    // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
   }
 
   return controller_ptr;
@@ -100,10 +101,10 @@ ExperimentalNavigationServer::loadRecoveryPlugin(const std::string& recovery_typ
     std::string recovery_name = recovery_plugin_loader_.getName(recovery_type);
     ROS_DEBUG_STREAM("mbf_costmap_core-based recovery plugin " << recovery_name << " loaded.");
   }
-  catch (const pluginlib::PluginlibException &ex_mbf_core)
+  catch (const pluginlib::PluginlibException& ex_mbf_core)
   {
     ROS_DEBUG_STREAM("Failed to load the " << recovery_type << " recovery." << ex_mbf_core.what());
-                                          // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
+    // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
   }
 
   return recovery_ptr;

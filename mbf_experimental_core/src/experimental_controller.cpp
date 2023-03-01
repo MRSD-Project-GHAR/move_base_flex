@@ -51,23 +51,23 @@ uint32_t ExperimentalController::computeVelocityCommands(const geometry_msgs::Po
                                                          const geometry_msgs::TwistStamped& velocity,
                                                          geometry_msgs::TwistStamped& cmd_vel, std::string& message)
 {
-    std::cout << "Computing dummy velocity commands! \n";
+  std::cout << "Computing dummy velocity commands! \n";
 
-    ros::Duration sleep_time(0.004);
-    sleep_time.sleep();
+  ros::Duration sleep_time(0.004);
+  sleep_time.sleep();
 
-    cmd_vel.twist.linear.x = 1;
+  cmd_vel.twist.linear.x = 1;
 
-    std::cout << "computed dummy velocity commands! \n\n";
+  std::cout << "computed dummy velocity commands! \n\n";
 
-    // std::cout << "The pose I received is :" << pose << std::endl;
-    if (cancel_requested_) {
-        cancel_requested_ = false;
-        return 101;
-    }
+  // std::cout << "The pose I received is :" << pose << std::endl;
+  if (cancel_requested_)
+  {
+    cancel_requested_ = false;
+    return 101;
+  }
 
-    return 0;
-
+  return 0;
 }
 
 /**
@@ -78,13 +78,13 @@ uint32_t ExperimentalController::computeVelocityCommands(const geometry_msgs::Po
  */
 bool ExperimentalController::isGoalReached(double dist_tolerance, double angle_tolerance)
 {
-
-    if((ros::Time::now() - plan_time).toSec() > 0.1) {
-        std::cout << "Goal reached!\n\n";
-        return true;
-    }
-    std::cout << "Checking if Goal Reached!\n";
-    return false;
+  if ((ros::Time::now() - plan_time).toSec() > 0.1)
+  {
+    std::cout << "Goal reached!\n\n";
+    return true;
+  }
+  std::cout << "Checking if Goal Reached!\n";
+  return false;
 }
 
 /**
@@ -94,9 +94,9 @@ bool ExperimentalController::isGoalReached(double dist_tolerance, double angle_t
  */
 bool ExperimentalController::setPlan(const std::vector<geometry_msgs::PoseStamped>& plan)
 {
-    std::cout << "Setting Plan!\n";
-    plan_time = ros::Time::now();
-    return true;
+  std::cout << "Setting Plan!\n";
+  plan_time = ros::Time::now();
+  return true;
 }
 
 /**
@@ -105,9 +105,9 @@ bool ExperimentalController::setPlan(const std::vector<geometry_msgs::PoseStampe
  */
 bool ExperimentalController::cancel()
 {
-    std::cout << "Cancelling!\n";
-    cancel_requested_ = true;
-    return true;
+  std::cout << "Cancelling!\n";
+  cancel_requested_ = true;
+  return true;
 }
 
 // protected:

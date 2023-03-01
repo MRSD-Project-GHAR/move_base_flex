@@ -10,7 +10,7 @@ ExperimentalNavigationServerPtr experimental_nav_srv_ptr;
 void sigintHandler(int sig)
 {
   ROS_INFO_STREAM("Shutdown navigation server.");
-  if(experimental_nav_srv_ptr)
+  if (experimental_nav_srv_ptr)
   {
     experimental_nav_srv_ptr->stop();
   }
@@ -37,7 +37,8 @@ int main(int argc, char** argv)
   // costmap_nav_srv_ptr = boost::make_shared<mbf_costmap_nav::CostmapNavigationServer>(tf_listener_ptr);
   // ros::spin();
 
-  auto experimental_nav_srv_ptr = boost::make_shared<mbf_experimental_nav::ExperimentalNavigationServer>(tf_listener_ptr);
+  auto experimental_nav_srv_ptr =
+      boost::make_shared<mbf_experimental_nav::ExperimentalNavigationServer>(tf_listener_ptr);
 
   ros::spin();
 

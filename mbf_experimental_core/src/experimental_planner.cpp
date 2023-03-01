@@ -1,5 +1,5 @@
 #include <mbf_experimental_core/experimental_planner.hpp>
-  
+
 PLUGINLIB_EXPORT_CLASS(mbf_experimental_core::ExperimentalPlanner, mbf_abstract_core::AbstractPlanner)
 
 namespace mbf_experimental_core
@@ -45,8 +45,8 @@ uint32_t ExperimentalPlanner::makePlan(const geometry_msgs::PoseStamped& start, 
                                        std::string& message)
 
 {
-
-  if (cancel_requested_) {
+  if (cancel_requested_)
+  {
     cancel_requested_ = false;
     return 51;
   }
@@ -54,13 +54,13 @@ uint32_t ExperimentalPlanner::makePlan(const geometry_msgs::PoseStamped& start, 
   std::cout << "Making plan!\n";
 
   int count = 0;
-  while (!cancel_requested_ && count < 10) {
+  while (!cancel_requested_ && count < 10)
+  {
     ros::Duration sleep_time(1);
     sleep_time.sleep();
     std::cout << "Planning loop is running\n";
     count++;
   }
-  
 
   geometry_msgs::PoseStamped dummy_plan;
   dummy_plan.pose.position.x = 10.0;

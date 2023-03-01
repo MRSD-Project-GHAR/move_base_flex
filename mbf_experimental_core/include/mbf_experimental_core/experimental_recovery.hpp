@@ -36,7 +36,6 @@
  *
  */
 
-
 #pragma once
 
 #include <stdint.h>
@@ -45,42 +44,42 @@
 #include <mbf_abstract_core/abstract_recovery.h>
 #include <pluginlib/class_list_macros.h>
 
+namespace mbf_experimental_core
+{
+/**
+ * @class AbstractRecovery
+ * @brief Provides an interface for recovery behaviors used in navigation.
+ * All recovery behaviors written as plugins for the navigation stack must adhere to this interface.
+ */
+class ExperimentalRecovery : public mbf_abstract_core::AbstractRecovery
+{
+public:
+  //   typedef boost::shared_ptr< ::mbf_experimental_core::AbstractRecovery > Ptr;
 
-namespace mbf_experimental_core {
   /**
-   * @class AbstractRecovery
-   * @brief Provides an interface for recovery behaviors used in navigation.
-   * All recovery behaviors written as plugins for the navigation stack must adhere to this interface.
+   * @brief Runs the AbstractRecovery
+   * @param message The recovery behavior could set, the message should correspond to the return value
+   * @return An outcome which will be hand over to the action result.
    */
-  class ExperimentalRecovery : public mbf_abstract_core::AbstractRecovery {
-    public:
+  virtual uint32_t runBehavior(std::string& message);
 
-    //   typedef boost::shared_ptr< ::mbf_experimental_core::AbstractRecovery > Ptr;
+  /**
+   * @brief Virtual destructor for the interface
+   */
+  //   virtual ~ExperimentalRecovery(){}
 
-      /**
-       * @brief Runs the AbstractRecovery
-       * @param message The recovery behavior could set, the message should correspond to the return value
-       * @return An outcome which will be hand over to the action result.
-       */
-      virtual uint32_t runBehavior(std::string& message);
+  /**
+   * @brief Requests the recovery behavior to cancel, e.g. if it takes too much time.
+   * @return True if a cancel has been successfully requested, false if not implemented.
+   */
+  virtual bool cancel();
 
-      /**
-       * @brief Virtual destructor for the interface
-       */
-    //   virtual ~ExperimentalRecovery(){}
-
-      /**
-       * @brief Requests the recovery behavior to cancel, e.g. if it takes too much time.
-       * @return True if a cancel has been successfully requested, false if not implemented.
-       */
-      virtual bool cancel();
-
-    protected:
-      /**
-       * @brief Constructor
-       */
-    //   ExperimentalRecovery(){};
-  };
-};  /* namespace mbf_experimental_core */
+protected:
+  /**
+   * @brief Constructor
+   */
+  //   ExperimentalRecovery(){};
+};
+}; /* namespace mbf_experimental_core */
 
 // #endif  /* MBF_ABSTRACT_CORE__ABSTRACT_RECOVERY_H_ */

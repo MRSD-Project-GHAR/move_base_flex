@@ -71,7 +71,6 @@ public:
   bool cancel();
 
 private:
-
   bool cancel_requested_ = false;
   ros::Time plan_time;
   /**
@@ -79,4 +78,4 @@ private:
    */
   //   ExperimentalController(){};
 };
-} /* namespace mbf_abstract_core */
+}  // namespace mbf_experimental_core
