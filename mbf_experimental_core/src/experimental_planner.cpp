@@ -50,13 +50,24 @@ uint32_t ExperimentalPlanner::makePlan(const geometry_msgs::PoseStamped& start, 
     cancel_requested_ = false;
     return 51;
   }
-  std::cout << "Made a dummy plan!" << std::endl;
-  // plan[0].pose.position.x = 10.0;
+
+  std::cout << "Making plan!\n";
+
+  int count = 0;
+  while (!cancel_requested_ && count < 10) {
+    ros::Duration sleep_time(1);
+    sleep_time.sleep();
+    std::cout << "Planning loop is running\n";
+    count++;
+  }
+  
+
   geometry_msgs::PoseStamped dummy_plan;
   dummy_plan.pose.position.x = 10.0;
   dummy_plan.pose.orientation.w = 1.0;
   dummy_plan.header.frame_id = "odom";
   plan.push_back(dummy_plan);
+  std::cout << "Made a dummy plan!" << std::endl;
 
   return 0;
 }

@@ -73,6 +73,7 @@ public:
 private:
 
   bool cancel_requested_ = false;
+  ros::Time plan_time;
   /**
    * @brief Constructor
    */

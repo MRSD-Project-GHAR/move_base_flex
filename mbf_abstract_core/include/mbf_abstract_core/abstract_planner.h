@@ -48,7 +48,7 @@
 namespace mbf_abstract_core
 {
 
-  class AbstractPlanner{
+  class   AbstractPlanner{
 
     public:
       typedef boost::shared_ptr< ::mbf_abstract_core::AbstractPlanner > Ptr;

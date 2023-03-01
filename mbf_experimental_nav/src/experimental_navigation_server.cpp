@@ -30,22 +30,22 @@ ExperimentalNavigationServer::~ExperimentalNavigationServer() {
 
 mbf_abstract_core::AbstractPlanner::Ptr ExperimentalNavigationServer::loadPlannerPlugin(const std::string& planner_type)
 {
-  mbf_abstract_core::AbstractPlanner::Ptr planner_ptr = NULL;
-  try
-  {
-    planner_ptr = boost::static_pointer_cast<mbf_abstract_core::AbstractPlanner>(
-        planner_plugin_loader_.createInstance(planner_type));
+    mbf_abstract_core::AbstractPlanner::Ptr planner_ptr = NULL;
+    try
+    {
+      planner_ptr = boost::static_pointer_cast<mbf_abstract_core::AbstractPlanner>(
+          planner_plugin_loader_.createInstance(planner_type));
 
-    std::string planner_name = planner_plugin_loader_.getName(planner_type);
-    ROS_DEBUG_STREAM("mbf_costmap_core-based planner plugin " << planner_name << " loaded.");
-  }
-  catch (const pluginlib::PluginlibException &ex_mbf_core)
-  {
-    ROS_DEBUG_STREAM("Failed to load the " << planner_type << " planner." << ex_mbf_core.what());
-                                          // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
-  }
+      std::string planner_name = planner_plugin_loader_.getName(planner_type);
+      ROS_DEBUG_STREAM("mbf_costmap_core-based planner plugin " << planner_name << " loaded.");
+    }
+    catch (const pluginlib::PluginlibException &ex_mbf_core)
+    {
+      ROS_DEBUG_STREAM("Failed to load the " << planner_type << " planner." << ex_mbf_core.what());
+                                            // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
+    }
 
-  return planner_ptr;
+    return planner_ptr;
   // return NULL;
 }
 
