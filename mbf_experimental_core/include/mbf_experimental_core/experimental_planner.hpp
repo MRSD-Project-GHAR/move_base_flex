@@ -3,21 +3,16 @@
 #include <mbf_abstract_core/abstract_planner.h>
 #include <pluginlib/class_list_macros.h>
 
-// #include <costmap_2d/costmap_2d_ros.h>
-
 namespace mbf_experimental_core
 {
 /**
  * @class ExperimentalPlanner
- * @brief Provides an interface for global planners used in navigation.
- * All global planners written to work as MBF plugins must adhere to this interface. Alternatively, this
- * class can also operate as a wrapper for old API nav_core-based plugins, providing backward compatibility.
+ * @brief This class generates a path through the environment, given the original location of the robot and the goal
+ *  point location.
  */
 class ExperimentalPlanner : public mbf_abstract_core::AbstractPlanner
 {
 public:
-  //   typedef boost::shared_ptr< ::mbf_costmap_core::ExperimentalPlanner > Ptr;
-
   /**
    * @brief Given a goal pose in the world, compute a plan
    * @param start The start pose
@@ -54,27 +49,7 @@ public:
    */
   bool cancel();
 
-  /**
-   * @brief Initialization function for the ExperimentalPlanner
-   * @param name The name of this planner
-   * @param costmap_ros A pointer to the ROS wrapper of the costmap to use for planning
-   */
-  // void initialize(std::string name, int map);
-
-  /**
-   * @brief  Virtual destructor for the interface
-   */
-  //  ~ExperimentalPlanner()
-  // {
-  // }
-
-protected:
-  // ExperimentalPlanner()
-  // {
-  // }
-
 private:
   bool cancel_requested_ = false;
-  // pluginlib::ClassLoader<mbf_experimental_core::ExperimentalPlanner> planner_plugin_loader_;
 };
 }  // namespace mbf_experimental_core

@@ -4,14 +4,16 @@
 
 namespace mbf_experimental_nav
 {
+// Initialize the base class constructor and all the plugin loaders
 ExperimentalNavigationServer::ExperimentalNavigationServer(const TFPtr& tf_listener_ptr)
-  // : AbstractNavigationServer(tf_listener_ptr)
   : mbf_abstract_nav::AbstractNavigationServer(tf_listener_ptr)
   , planner_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractPlanner")
   , recovery_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractRecovery")
   , controller_plugin_loader_("mbf_abstract_core", "mbf_abstract_core::AbstractController")
 
 {
+  // For more info on why we are calling these functions, head over to our website
+  // https://mrsdprojects.ri.cmu.edu/2023teami/move-base-flex-navigation-server/
   initializeServerComponents();
 
   startActionServers();
@@ -19,6 +21,7 @@ ExperimentalNavigationServer::ExperimentalNavigationServer(const TFPtr& tf_liste
 
 ExperimentalNavigationServer::~ExperimentalNavigationServer()
 {
+  // This code is to ensure that all plugins and action servers shutdown properly before the navigation server destructs
   planner_plugin_manager_.clearPlugins();
   controller_plugin_manager_.clearPlugins();
   recovery_plugin_manager_.clearPlugins();
@@ -32,6 +35,9 @@ ExperimentalNavigationServer::~ExperimentalNavigationServer()
 mbf_abstract_core::AbstractPlanner::Ptr ExperimentalNavigationServer::loadPlannerPlugin(const std::string& planner_type)
 {
   mbf_abstract_core::AbstractPlanner::Ptr planner_ptr = NULL;
+  
+  // This block is what loads the planner class and gives it to the plugin manager. For more info, consult the website
+  // https://mrsdprojects.ri.cmu.edu/2023teami/move-base-flex-navigation-server/
   try
   {
     planner_ptr = boost::static_pointer_cast<mbf_abstract_core::AbstractPlanner>(
@@ -43,11 +49,9 @@ mbf_abstract_core::AbstractPlanner::Ptr ExperimentalNavigationServer::loadPlanne
   catch (const pluginlib::PluginlibException& ex_mbf_core)
   {
     ROS_DEBUG_STREAM("Failed to load the " << planner_type << " planner." << ex_mbf_core.what());
-    // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
   }
 
   return planner_ptr;
-  // return NULL;
 }
 
 bool ExperimentalNavigationServer::initializePlannerPlugin(const std::string& name,
@@ -60,11 +64,10 @@ bool ExperimentalNavigationServer::initializePlannerPlugin(const std::string& na
 mbf_abstract_core::AbstractController::Ptr
 ExperimentalNavigationServer::loadControllerPlugin(const std::string& controller_type)
 {
-  // std::cout << "Dummy controller plugin loaded\n\n";
-  //   return true;
-  // return NULL;
-
   mbf_abstract_core::AbstractController::Ptr controller_ptr = NULL;
+  
+  // This block is what loads the controller class and gives it to the plugin manager. For more info, consult the website
+  // https://mrsdprojects.ri.cmu.edu/2023teami/move-base-flex-navigation-server/
   try
   {
     controller_ptr = boost::static_pointer_cast<mbf_abstract_core::AbstractController>(
@@ -76,7 +79,6 @@ ExperimentalNavigationServer::loadControllerPlugin(const std::string& controller
   catch (const pluginlib::PluginlibException& ex_mbf_core)
   {
     ROS_DEBUG_STREAM("Failed to load the " << controller_type << " controller." << ex_mbf_core.what());
-    // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
   }
 
   return controller_ptr;
@@ -93,6 +95,9 @@ mbf_abstract_core::AbstractRecovery::Ptr
 ExperimentalNavigationServer::loadRecoveryPlugin(const std::string& recovery_type)
 {
   mbf_abstract_core::AbstractRecovery::Ptr recovery_ptr = NULL;
+  
+  // This block is what loads the recovery class and gives it to the plugin manager. For more info, consult the website
+  // https://mrsdprojects.ri.cmu.edu/2023teami/move-base-flex-navigation-server/
   try
   {
     recovery_ptr = boost::static_pointer_cast<mbf_abstract_core::AbstractRecovery>(
@@ -104,7 +109,6 @@ ExperimentalNavigationServer::loadRecoveryPlugin(const std::string& recovery_typ
   catch (const pluginlib::PluginlibException& ex_mbf_core)
   {
     ROS_DEBUG_STREAM("Failed to load the " << recovery_type << " recovery." << ex_mbf_core.what());
-    // << " Try to load as a nav_core-based plugin. " << ex_mbf_core.what());
   }
 
   return recovery_ptr;
